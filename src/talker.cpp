@@ -6,7 +6,7 @@ ExampleTalker::ExampleTalker(ros::NodeHandle nh) : nh_(nh), message_("hello"), a
 {
   // Set up a dynamic reconfigure server.
   // Do this before parameter server, else some of the parameter server values can be overwritten.
-  dynamic_reconfigure::Server<node_example::nodeExampleConfig>::CallbackType cb;
+  dynamic_reconfigure::Server<smart_cpp_ros_node::smartCppROSConfig>::CallbackType cb;
   cb = boost::bind(&ExampleTalker::configCallback, this, _1, _2);
   dr_srv_.setCallback(cb);
 
@@ -57,7 +57,7 @@ void ExampleTalker::timerCallback(const ros::TimerEvent &event __attribute__((un
   pub_.publish(msg);
 }
 
-void ExampleTalker::configCallback(smart_cpp_ros_node::smartCppROSconfig &config, uint32_t level __attribute__((unused)))
+void ExampleTalker::configCallback(smart_cpp_ros_node::smartCppROSConfig &config, uint32_t level __attribute__((unused)))
 {
   // Set class variables to new values. They should match what is input at the dynamic reconfigure GUI.
   message_ = config.message;

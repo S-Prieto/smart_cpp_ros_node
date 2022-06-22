@@ -40,9 +40,7 @@ generate_messages(
 ## Declare ROS dynamic reconfigure parameters ##
 ################################################
 
-generate_dynamic_reconfigure_options(
-  cfg/smartCppROSconfig.cfg
-)
+generate_dynamic_reconfigure_options(cfg/smartCppROS.cfg)
 
 ###################################
 ## catkin specific configuration ##
@@ -61,11 +59,11 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 add_executable(talker src/nodes/talker_node.cpp src/talker.cpp)
 target_link_libraries(talker ${catkin_LIBRARIES})
-add_dependencies(talker ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_dependencies(talker smart_cpp_ros_node_gencfg smart_cpp_ros_node_gencpp)
 
 add_executable(listener src/nodes/listener_node.cpp src/listener.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
-add_dependencies(listener ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_dependencies(listener smart_cpp_ros_node_gencfg smart_cpp_ros_node_gencpp)
 
 #############
 ## Install ##

@@ -11,7 +11,7 @@
 // Dynamic reconfigure includes.
 #include <dynamic_reconfigure/server.h>
 // Auto-generated from cfg/ directory.
-#include <smart_cpp_ros_node/smartCppROSconfig.h>
+#include <smart_cpp_ros_node/smartCppROSConfig.h>
 
 namespace smart_cpp_ros_node
 {
@@ -23,7 +23,7 @@ class ExampleTalker
 
  private:
   //! Callback function for dynamic reconfigure server.
-  void configCallback(smart_cpp_ros_node::smartCppROSconfig &config, uint32_t level);
+  void configCallback(smart_cpp_ros_node::smartCppROSConfig &config, uint32_t level);
 
   //! Timer callback for publishing message.
   void timerCallback(const ros::TimerEvent &event);
@@ -44,7 +44,7 @@ class ExampleTalker
   ros::Publisher pub_;
 
   //! Dynamic reconfigure server.
-  dynamic_reconfigure::Server<smart_cpp_ros_node::smartCppROSconfig> dr_srv_;
+  dynamic_reconfigure::Server<smart_cpp_ros_node::smartCppROSConfig> dr_srv_;
 
   //! The actual message.
   std::string message_;
