@@ -8,6 +8,9 @@
 // Custom message includes. Auto-generated from msg/ directory.
 #include <smart_cpp_ros_node/SmartCppROSdata.h>
 
+// Custom services includes. Auto-generated from srv/ directory
+#include <smart_cpp_ros_node/DummyService.h>
+
 // Dynamic reconfigure includes.
 #include <dynamic_reconfigure/server.h>
 // Auto-generated from cfg/ directory.
@@ -28,6 +31,9 @@ class ExampleTalker
   //! Timer callback for publishing message.
   void timerCallback(const ros::TimerEvent &event);
 
+  //! Callback function for service server
+  bool dummyServiceServerCallback(smart_cpp_ros_node::DummyService::Request& request, smart_cpp_ros_node::DummyService::Response& response);
+
   //! Turn on publisher.
   void start();
 
@@ -42,6 +48,9 @@ class ExampleTalker
 
   //! Message publisher.
   ros::Publisher pub_;
+
+  //! Service server.
+  ros::ServiceServer dummy_service_server_;
 
   //! Dynamic reconfigure server.
   dynamic_reconfigure::Server<smart_cpp_ros_node::smartCppROSConfig> dr_srv_;

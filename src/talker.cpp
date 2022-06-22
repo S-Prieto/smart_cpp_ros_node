@@ -22,7 +22,7 @@ ExampleTalker::ExampleTalker(ros::NodeHandle nh) : nh_(nh), message_("hello"), a
   pnh.param("rate", rate, rate);
   pnh.param("enable", enable_, enable_);
 
-  // Create a publisher and name the topic.
+  // Create a publisher and name the topic. Create any service servers.
   if (enable_)
   {
     start();
@@ -35,6 +35,7 @@ ExampleTalker::ExampleTalker(ros::NodeHandle nh) : nh_(nh), message_("hello"), a
 void ExampleTalker::start()
 {
   pub_ = nh_.advertise<smart_cpp_ros_node::SmartCppROSdata>("example", 10);
+  dummy_service_server_ = nh_.advertiseService("dummy_service", &ExampleTalker::dummyServiceServerCallback, this);
 }
 
 void ExampleTalker::stop()
@@ -77,5 +78,12 @@ void ExampleTalker::configCallback(smart_cpp_ros_node::smartCppROSConfig &config
     }
   }
   enable_ = config.enable;
+}
+
+bool ExampleTalker::dummyServiceServerCallback(smart_cpp_ros_node::DummyService::Request& request, smart_cpp_ros_node::DummyService::Response& response)
+{
+  ROS_INFO("This is just a dummy service. Your input was %d", request.dummy_input);
+  response.message = std::string("OK: Sucessful response");
+  return true;
 }
 }

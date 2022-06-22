@@ -1,0 +1,26 @@
+<!-- Starts up everything needed to run the example listener/talker nodes. -->
+<launch>
+  <!-- Arguments to allow changing common parameters from the command line or when including this file from other launch files. -->
+  <arg name="a" default="1"/>
+  <arg name="b" default="2"/>
+  <arg name="message" default="hello"/>
+  <arg name="rate" default="1.0"/>
+
+  <!-- The talker node will publish a custom message. -->
+  <node pkg="smart_cpp_ros_node" type="talker" name="talker">
+    <param name="a" value="$(arg a)"/>
+    <param name="b" value="$(arg b)"/>
+    <param name="message" value="$(arg message)"/>
+    <param name="rate" value="$(arg rate)"/>
+    <!-- We can also remap the topics to a different name -->
+    <remap from="example" to="chatter"/>  
+  </node>
+
+  <!-- The listener node subscribes to the custom message that talker is publishing. -->
+  <node pkg="smart_cpp_ros_node" type="listener" name="listener">
+    <remap from="example" to="chatter"/>
+  </node>
+
+  <!-- An example on how to include other launch files -->
+  <include file="$(find smart_cpp_ros_node)/launch/tools.launch"/>
+</launch>
